@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cumpleaños</title>
+    <style>
+        /* Estilos generales */
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+
+        h2, h3 {
+            color: #ccc;
+            text-align: center;
+        }
+
+        section {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        /* Estilos para las fotos */
+        #fotos img {
+            width: 100%;
+            max-width: 400px;
+            margin: 10px;
+            border-radius: 10px;
+        }
+
+        /* Estilos para el contador regresivo */
+        #contador {
+            font-size: 30px;
+            color: #ccc;
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+        }
+
+        /* Estilo para el mapa */
+        #ubicacion iframe {
+            width: 100%;
+            height: 450px;
+            border: 0;
+        }
+
+        /* Botones */
+        .boton {
+            padding: 15px 30px;
+            background-color: #555;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin: 20px 0;
+        }
+        
+        .boton:hover {
+            background-color: #777;
+        }
+
+        /* Estilos para el botón */
+#btnCodigoVestimenta {
+    font-size: 24px;
+    padding: 15px 30px;
+    background-color: #444;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    display: block;
+    margin: 20px auto;
+    width: 250px;
+}
+
+/* Estilos para el overlay */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo negro con opacidad */
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+/* Estilos para el modal */
+.modal {
+    background-color: #1a1a1a; /* Fondo negro */
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    position: relative;
+    width: 300px;
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5); /* Sombra plateada */
+}
+
+/* Estilos para el contenido del modal */
+.modal-content img.icon {
+    width: 50px;
+    height: auto;
+}
+
+.modal-content h2 {
+    margin: 20px 0;
+    font-size: 24px;
+    color: #000000; /* Texto plateado */
+}
+
+.modal-content p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #000000; /* Texto plateado */
+}
+
+/* Estilo del botón de cerrar (X) */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #ccc; /* Color plateado */
+}
+
+
+        #btnMusica {
+            font-size: 24px; /* Aumentar el tamaño del texto */
+            padding: 15px 30px; /* Espaciado del botón */
+            background-color: #444; /* Color de fondo */
+            color: white; /* Color del texto */
+            border: none; /* Sin borde */
+            cursor: pointer; /* Cambia el cursor al pasar el ratón */
+            border-radius: 5px; /* Bordes redondeados */
+            display: block; /* Centrar el botón */
+            margin: 20px auto; /* Espaciado superior/inferior y centrar horizontalmente */
+            width: 250px; /* Ancho fijo para el botón */
+        }
+        #overlay {
+            display: none; /* Ocultar inicialmente */
+            position: fixed; /* Fijar posición */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Color negro con transparencia */
+            z-index: 999; /* Asegurarse de que esté por encima de otros elementos */
+            justify-content: center; /* Centrar el contenido */
+            align-items: center; /* Centrar el contenido verticalmente */
+        }
+        #formMusica {
+            background-color: white; /* Fondo blanco para el formulario */
+            padding: 20px;
+            border-radius: 10px; /* Bordes redondeados */
+            color: black; /* Color del texto dentro del formulario */
+            text-align: center; /* Centrar el texto */
+            min-width: 300px; /* Ancho mínimo del formulario */
+        }
+        #closeBtn {
+            cursor: pointer; /* Cambia el cursor al pasar el ratón */
+            margin-top: 10px; /* Espacio arriba del botón de cerrar */
+            background-color: #444; /* Color de fondo */
+            color: white; /* Color del texto */
+            border: none; /* Sin borde */
+            padding: 10px; /* Espaciado del botón */
+            border-radius: 5px; /* Bordes redondeados */
+        }
+
+        /* Estilo del modal */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 8); /* Fondo negro con opacidad */
+}
+
+.modal-content {
+    background-color: #ffffff; /* Fondo negro */
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #000000;
+    width: 30%;
+    text-align: center;
+    color: #ffffff; /* Texto gris claro */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.corbatin-boton {
+    display: inline-block;
+    padding: 10px;
+    border: 2px solid #cccccc; /* Líneas alrededor */
+    border-radius: 10px; /* Bordes redondeados */
+    cursor: pointer; /* Mostrar como botón clicable */
+    transition: transform 0.2s; /* Añadir una pequeña animación */
+}
+
+.corbatin-boton:hover {
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño al pasar el mouse */
+}
+.imagenes-elegantes {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.imagenes-elegantes img {
+    margin: 0 10px; /* Espacio entre las imágenes */
+}
+/* Estilo del texto dentro del modal */
+.modal-contenido p {
+    color: #ffffff; /* Color negro */
+    font-size: 24px; /* Tamaño de fuente ajustable */
+    font-weight: bold; /* Negrita */
+    text-align: center;
+}
+/* Estilos para centrar las imágenes dentro del modal */
+.imagenes-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px; /* Espacio entre imágenes y texto */
+}
+
+.imagen-modal {
+    width: 100px; /* Ajusta el tamaño de las imágenes */
+    margin: 0 10px; /* Espacio entre las imágenes */
+}
+
+/* Otros estilos del modal */
+.modal-contenido {
+    background-color: #ffffff;
+    padding: 20px;
+    border: 2px solid black;
+    text-align: center;
+}
+/* Estilo para la imagen que reemplaza al botón de música */
+.imagen-boton {
+    width: 50px; /* Ajusta el tamaño de la imagen de la nota musical */
+    cursor: pointer;
+    margin-bottom: 10px; /* Espacio entre la imagen y el texto "Música" */
+    transition: transform 0.3s ease; /* Añadir un efecto al pasar el ratón por encima */
+}
+
+.imagen-boton:hover {
+    transform: scale(1.1); /* Efecto de agrandar al pasar el ratón */
+}
+/* Estilo para la imagen del botón (corbatín y nota musical) */
+.imagen-boton {
+    width: 100px; /* Ajusta este tamaño para que sea el mismo que el del corbatín */
+    cursor: pointer;
+    margin-bottom: 10px;
+    display: block; /* Esto asegura que se comporte como un bloque y se pueda centrar */
+    margin-left: auto;
+    margin-right: auto;
+    transition: transform 0.3s ease;
+}
+
+.imagen-boton:hover {
+    transform: scale(1.1); /* Efecto de agrandar al pasar el ratón */
+}
+
+    </style>
+</head>
+<body>
+
+    <!-- Sección de fotos -->
+    <section id="fotos">
+        <h2>Fotitos</h2>
+        <img src="images/foto1.jpg" alt="Foto 1">
+        <img src="images/foto2.jpg" alt="Foto 2">
+        <img src="images/foto3.jpg" alt="Foto 3">
+    </section>
+
+    <!-- Sección del contador regresivo -->
+    <section id="contador">
+        <h2>Cuenta Regresiva para Mi Cumpleaños</h2>
+        <div id="tiempo"></div>
+    </section>
+
+    <!-- Sección del mapa -->
+    <section id="ubicacion">
+        <h2>Ubicación de la Fiesta</h2>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4035.6172742868557!2d-58.272775923413576!3d-34.71174346321281!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95a32e04dc406087%3A0xda91cb30f4a473a3!2sLoft!5e1!3m2!1ses-419!2sar!4v1727294518264!5m2!1ses-419!2sar" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
+
+ <!-- Imagen del corbatín -->
+ <img src="images/bow-tie-silver.png" alt="Dress Code" id="dress-code-button" style="width: 100px; display: block; margin: 0 auto; cursor: pointer;">
+
+ <!-- Cuadro emergente (modal) -->
+ <div id="dress-code-modal" class="modal">
+     <div class="modal-content">
+         <span class="close">&times;</span>
+         <h2>Elegante Sport</h2>
+     </div>
+ </div>
+
+ <div id="musica" style="text-align: center; margin-top: 50px;"> <!-- Separación entre los botones -->
+    <img src="images/png-transparent-musical-note-drawing-blue-note-music-related-s-cartoon-music-download-melody.png" alt="Nota Musical" id="boton-musica" class="imagen-boton">
+    
+</div>
+
+    <div id="overlay">
+        <div id="formMusica">
+            <h3>Escribe el nombre de la música:</h3>
+            <input type="text" id="nombreMusica" placeholder="Nombre de la música">
+            <button id="enviarMusica">Enviar</button>
+            <button id="closeBtn">Cerrar</button>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.slider').slick({
+                dots: true,
+                infinite: true,
+                speed: 500,
+                slidesToShow: 1,
+                slidesToScroll: 1
+            });
+
+            // Muestra el overlay cuando se hace clic en el botón
+            $('#boton-musica').click(function() {
+                $('#overlay').show();
+            });
+
+            // Maneja el envío del formulario
+            $('#enviarMusica').click(function() {
+                var musica = $('#nombreMusica').val();
+                if (musica) {
+                    alert('Sugerencia de música enviada: ' + musica);
+                    $('#nombreMusica').val(''); // Limpiar el campo
+                    $('#overlay').hide(); // Ocultar el overlay
+                } else {
+                    alert('Por favor, escribe un nombre de música.');
+                }
+            });
+
+            // Cierra el overlay
+            $('#closeBtn').click(function() {
+                $('#overlay').hide();
+            });
+        });
+    </script>
+    
+    </section>
+
+    <!-- JavaScript para el contador regresivo -->
+    <script>
+        // Función para el contador regresivo
+        const fechaCumpleanos = new Date('October 19, 2024 21:30:00').getTime();
+
+        const actualizarContador = setInterval(() => {
+            const ahora = new Date().getTime();
+            const diferencia = fechaCumpleanos - ahora;
+
+            const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+            document.getElementById("tiempo").innerHTML = dias + "d " + horas + "h " + minutos + "m " + segundos + "s ";
+
+            if (diferencia < 0) {
+                clearInterval(actualizarContador);
+                document.getElementById("tiempo").innerHTML = "¡Es mi cumpleaños!";
+            }
+        }, 1000);
+
+        // Mostrar el modal de vestimenta al hacer clic en el botón
+document.getElementById("btnCodigoVestimenta").onclick = function() {
+    document.getElementById("overlayVestimenta").style.display = "flex";
+}
+
+// Cerrar el modal de vestimenta
+document.getElementById("closeBtnVestimenta").onclick = function() {
+    document.getElementById("overlayVestimenta").style.display = "none";
+}
+
+// Cerrar el modal cuando se hace clic fuera de él
+window.onclick = function(event) {
+    var overlay = document.getElementById("overlayVestimenta");
+    if (event.target == overlay) {
+        overlay.style.display = "none";
+    }
+}
+function abrirFormularioMusica() {
+    // Asegúrate de que este código muestre tu formulario
+    document.getElementById('formulario-musica').style.display = 'block';
+}
+
+// Asegúrate de que la función del botón esté vinculada a la imagen
+document.getElementById('boton-musica').addEventListener('click', function() {
+    // Código para abrir el formulario de sugerencias de música
+    abrirFormularioMusica(); // Reemplaza esto con tu función actual
+});
+
+
+        // Función para mostrar el código de vestimenta
+        function mostrarMensaje() {
+            alert("Elegante Sport.");
+        }
+    </script>
+
+<script>
+    // Obtener elementos
+    var modal = document.getElementById("dress-code-modal");
+    var btn = document.getElementById("dress-code-button");
+    var span = document.getElementsByClassName("close")[0];
+
+    // Mostrar el modal al hacer clic en la imagen del corbatín
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // Cerrar el modal al hacer clic en la "X"
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Cerrar el modal si el usuario hace clic fuera del cuadro
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+<div id="miModal" class="modal">
+    <div class="modal-contenido">
+        <span class="cerrar" onclick="cerrarModal()">&times;</span>
+        <!-- Agrega las imágenes de pantalón y zapatos -->
+        <div class="imagenes-elegantes">
+            <img src="images/png-transparent-sweatpants-slim-fit-pants-clothing-fashion-jeans-textile-fashion-black-thumbnail.png" alt="Pantalón Elegante" style="width: 100px;">
+            <img src="images/372-3727883_dibujo-zapato-png-zapatos-dibujo-png-transparent-png.png" alt="Zapatos Elegantes" style="width: 100px;">
+        </div>
+        <p>Elegante Sport</p>
+    </div>
+</div>
+ 
+ <script type="text/javascript">
+    (function() {
+       emailjs.init('LB6iUSmOOHo9Om5K0'); // Reemplaza 'TU_USER_ID' con tu User ID de EmailJS
+    })();
+ 
+    function sendEmail() {
+       var templateParams = {
+          musica: document.getElementById('musica').value
+       };
+ 
+       emailjs.send('service_hbh24wp', 'template_fhe2zc8', templateParams)
+          .then(function(response) {
+             alert('¡Sugerencia enviada correctamente!');
+          }, function(error) {
+             alert('Error al enviar la sugerencia:', error);
+          });
+    }
+ </script>
+ 
+</body>
+</html>
+
